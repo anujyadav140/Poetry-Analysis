@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_quill: ^7.1.10
+  flutter_quill: ^7.4.3
   rive: ^0.11.4
   auto_size_text: ^3.0.0
   google_fonts: ^4.0.3
