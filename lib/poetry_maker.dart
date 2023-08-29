@@ -80,7 +80,8 @@ class _PoetryMakerState extends State<PoetryMaker> {
     void findForm() async {
       // url = 'http://127.0.0.1:5000/poetry-analysis';
       // url = 'https://poetry-analysis.el.r.appspot.com/poetry-analysis';
-      url = 'https://poetry-analysis-server.azurewebsites.net/poetry-analysis';
+      // url = 'https://poetry-analysis-server.azurewebsites.net/poetry-analysis';
+      url = 'https://flask-production-ecff.up.railway.app/poetry-analysis';
       data = await postForm(url, jsonEncode(plainText));
       var decodeData = jsonDecode(data);
       setState(() {
