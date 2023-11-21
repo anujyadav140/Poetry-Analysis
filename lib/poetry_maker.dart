@@ -29,6 +29,7 @@ class _PoetryMakerState extends State<PoetryMaker> {
   SMIInput<bool>? isClicked;
   bool isPressed = false;
   bool isCloseButtonPressed = false;
+  bool isFail = false;
   late String url;
   @override
   void initState() {
@@ -82,6 +83,7 @@ class _PoetryMakerState extends State<PoetryMaker> {
       // url = 'https://poetry-analysis.el.r.appspot.com/poetry-analysis';
       // url = 'https://poetry-analysis-server.azurewebsites.net/poetry-analysis';
       url = 'https://flask-production-ecff.up.railway.app/poetry-analysis';
+      // url = "https://poetry-analysis.onrender.com/poetry-analysis";
       data = await postForm(url, jsonEncode(plainText));
       var decodeData = jsonDecode(data);
       setState(() {
@@ -93,6 +95,7 @@ class _PoetryMakerState extends State<PoetryMaker> {
           });
         });
       });
+
       print(formData);
     }
 
@@ -376,230 +379,210 @@ class _PoetryMakerState extends State<PoetryMaker> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
-                              return formData.isNotEmpty
-                                  ? Column(
-                                      children: [
-                                        RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(
-                                                  fontSize: isAndroid()
+                              return Column(
+                                children: [
+                                  RichText(
+                                      text: TextSpan(
+                                          style: TextStyle(
+                                            fontSize: isAndroid()
+                                                ? 15
+                                                : mobileWeb
+                                                    ? 15
+                                                    : 22,
+                                            color: Colors.black,
+                                          ),
+                                          children: <TextSpan>[
+                                        TextSpan(
+                                            text: "Closest metre: ",
+                                            style: GoogleFonts.cardo(
+                                              fontSize: isAndroid()
+                                                  ? 18
+                                                  : mobileWeb
                                                       ? 15
-                                                      : mobileWeb
-                                                          ? 15
-                                                          : 22,
-                                                  color: Colors.black,
-                                                ),
-                                                children: <TextSpan>[
-                                              TextSpan(
-                                                  text: "Closest metre: ",
-                                                  style: GoogleFonts.cardo(
-                                                    fontSize: isAndroid()
-                                                        ? 18
-                                                        : mobileWeb
-                                                            ? 15
-                                                            : 22,
-                                                    color: Colors.black,
-                                                  )),
-                                              TextSpan(
-                                                  text:
-                                                      "${formData["Closest metre"]}",
-                                                  style: GoogleFonts.cardo(
-                                                      fontSize: isAndroid()
-                                                          ? 18
-                                                          : mobileWeb
-                                                              ? 15
-                                                              : 22,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ])),
-                                        RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(
+                                                      : 22,
+                                              color: Colors.black,
+                                            )),
+                                        TextSpan(
+                                            text:
+                                                "${formData["Closest metre"]}",
+                                            style: GoogleFonts.cardo(
+                                                fontSize: isAndroid()
+                                                    ? 18
+                                                    : mobileWeb
+                                                        ? 15
+                                                        : 22,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold)),
+                                      ])),
+                                  RichText(
+                                      text: TextSpan(
+                                          style: TextStyle(
+                                            fontSize: isAndroid()
+                                                ? 18
+                                                : mobileWeb
+                                                    ? 15
+                                                    : 22,
+                                            color: Colors.black,
+                                          ),
+                                          children: <TextSpan>[
+                                        TextSpan(
+                                            text: "Closest rhyme: ",
+                                            style: GoogleFonts.cardo(
+                                              fontSize: isAndroid()
+                                                  ? 18
+                                                  : mobileWeb
+                                                      ? 15
+                                                      : 22,
+                                              color: Colors.black,
+                                            )),
+                                        TextSpan(
+                                            text:
+                                                "${formData["Closest rhyme"]}",
+                                            style: GoogleFonts.cardo(
+                                                fontSize: isAndroid()
+                                                    ? 18
+                                                    : mobileWeb
+                                                        ? 15
+                                                        : 22,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold)),
+                                      ])),
+                                  RichText(
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 12,
+                                      text: TextSpan(
+                                          style: TextStyle(
+                                            fontSize: isAndroid()
+                                                ? 18
+                                                : mobileWeb
+                                                    ? 15
+                                                    : 22,
+                                            color: Colors.black,
+                                          ),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: "Closest rhyme scheme: ",
+                                                style: GoogleFonts.cardo(
                                                   fontSize: isAndroid()
                                                       ? 18
                                                       : mobileWeb
                                                           ? 15
                                                           : 22,
                                                   color: Colors.black,
-                                                ),
-                                                children: <TextSpan>[
-                                              TextSpan(
-                                                  text: "Closest rhyme: ",
-                                                  style: GoogleFonts.cardo(
+                                                )),
+                                            TextSpan(
+                                                text:
+                                                    "${formData["Rhyme scheme"]}",
+                                                style: GoogleFonts.cardo(
                                                     fontSize: isAndroid()
                                                         ? 18
                                                         : mobileWeb
                                                             ? 15
                                                             : 22,
                                                     color: Colors.black,
-                                                  )),
-                                              TextSpan(
-                                                  text:
-                                                      "${formData["Closest rhyme"]}",
-                                                  style: GoogleFonts.cardo(
-                                                      fontSize: isAndroid()
-                                                          ? 18
-                                                          : mobileWeb
-                                                              ? 15
-                                                              : 22,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ])),
-                                        RichText(
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 12,
-                                            text: TextSpan(
-                                                style: TextStyle(
-                                                  fontSize: isAndroid()
-                                                      ? 18
-                                                      : mobileWeb
-                                                          ? 15
-                                                          : 22,
-                                                  color: Colors.black,
-                                                ),
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                      text:
-                                                          "Closest rhyme scheme: ",
-                                                      style: GoogleFonts.cardo(
-                                                        fontSize: isAndroid()
-                                                            ? 18
-                                                            : mobileWeb
-                                                                ? 15
-                                                                : 22,
-                                                        color: Colors.black,
-                                                      )),
-                                                  TextSpan(
-                                                      text:
-                                                          "${formData["Rhyme scheme"]}",
-                                                      style: GoogleFonts.cardo(
-                                                          fontSize: isAndroid()
-                                                              ? 18
-                                                              : mobileWeb
-                                                                  ? 15
-                                                                  : 22,
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                ])),
-                                        RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(
-                                                  fontSize: isAndroid()
-                                                      ? 18
-                                                      : mobileWeb
-                                                          ? 15
-                                                          : 22,
-                                                  color: Colors.black,
-                                                ),
-                                                children: <TextSpan>[
-                                              TextSpan(
-                                                  text: "Closest stanza type: ",
-                                                  style: GoogleFonts.cardo(
-                                                    fontSize: isAndroid()
-                                                        ? 18
-                                                        : mobileWeb
-                                                            ? 15
-                                                            : 22,
-                                                    color: Colors.black,
-                                                  )),
-                                              TextSpan(
-                                                  text:
-                                                      "${formData["Closest stanza type"]}",
-                                                  style: GoogleFonts.cardo(
-                                                      fontSize: isAndroid()
-                                                          ? 18
-                                                          : mobileWeb
-                                                              ? 15
-                                                              : 22,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ])),
-                                        RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(
-                                                  fontSize: isAndroid()
-                                                      ? 18
-                                                      : mobileWeb
-                                                          ? 15
-                                                          : 22,
-                                                  color: Colors.black,
-                                                ),
-                                                children: <TextSpan>[
-                                              TextSpan(
-                                                  text: "Guessed form: ",
-                                                  style: GoogleFonts.cardo(
-                                                    fontSize: isAndroid()
-                                                        ? 18
-                                                        : mobileWeb
-                                                            ? 15
-                                                            : 22,
-                                                    color: Colors.black,
-                                                  )),
-                                              TextSpan(
-                                                  text:
-                                                      "${formData["Guessed form"]}",
-                                                  style: GoogleFonts.cardo(
-                                                      fontSize: isAndroid()
-                                                          ? 18
-                                                          : mobileWeb
-                                                              ? 15
-                                                              : 22,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ])),
-                                        RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(
-                                                  fontSize: isAndroid()
-                                                      ? 18
-                                                      : mobileWeb
-                                                          ? 15
-                                                          : 22,
-                                                  color: Colors.black,
-                                                ),
-                                                children: <TextSpan>[
-                                              TextSpan(
-                                                  text:
-                                                      "Closest stanza length: ",
-                                                  style: GoogleFonts.cardo(
-                                                    fontSize: isAndroid()
-                                                        ? 18
-                                                        : mobileWeb
-                                                            ? 15
-                                                            : 22,
-                                                    color: Colors.black,
-                                                  )),
-                                              TextSpan(
-                                                  text:
-                                                      "${formData["Stanza lengths"]}",
-                                                  style: GoogleFonts.cardo(
-                                                      fontSize: isAndroid()
-                                                          ? 18
-                                                          : mobileWeb
-                                                              ? 15
-                                                              : 22,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                            ])),
-                                      ],
-                                    )
-                                  : Column(
-                                      children: [
-                                        const Text(
-                                            "Click on the button, Try again ..."),
-                                        IconButton(
-                                            onPressed: () {
-                                              findForm();
-                                            },
-                                            icon: const Icon(Icons.refresh))
-                                      ],
-                                    );
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ])),
+                                  RichText(
+                                      text: TextSpan(
+                                          style: TextStyle(
+                                            fontSize: isAndroid()
+                                                ? 18
+                                                : mobileWeb
+                                                    ? 15
+                                                    : 22,
+                                            color: Colors.black,
+                                          ),
+                                          children: <TextSpan>[
+                                        TextSpan(
+                                            text: "Closest stanza type: ",
+                                            style: GoogleFonts.cardo(
+                                              fontSize: isAndroid()
+                                                  ? 18
+                                                  : mobileWeb
+                                                      ? 15
+                                                      : 22,
+                                              color: Colors.black,
+                                            )),
+                                        TextSpan(
+                                            text:
+                                                "${formData["Closest stanza type"]}",
+                                            style: GoogleFonts.cardo(
+                                                fontSize: isAndroid()
+                                                    ? 18
+                                                    : mobileWeb
+                                                        ? 15
+                                                        : 22,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold)),
+                                      ])),
+                                  RichText(
+                                      text: TextSpan(
+                                          style: TextStyle(
+                                            fontSize: isAndroid()
+                                                ? 18
+                                                : mobileWeb
+                                                    ? 15
+                                                    : 22,
+                                            color: Colors.black,
+                                          ),
+                                          children: <TextSpan>[
+                                        TextSpan(
+                                            text: "Guessed form: ",
+                                            style: GoogleFonts.cardo(
+                                              fontSize: isAndroid()
+                                                  ? 18
+                                                  : mobileWeb
+                                                      ? 15
+                                                      : 22,
+                                              color: Colors.black,
+                                            )),
+                                        TextSpan(
+                                            text: "${formData["Guessed form"]}",
+                                            style: GoogleFonts.cardo(
+                                                fontSize: isAndroid()
+                                                    ? 18
+                                                    : mobileWeb
+                                                        ? 15
+                                                        : 22,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold)),
+                                      ])),
+                                  RichText(
+                                      text: TextSpan(
+                                          style: TextStyle(
+                                            fontSize: isAndroid()
+                                                ? 18
+                                                : mobileWeb
+                                                    ? 15
+                                                    : 22,
+                                            color: Colors.black,
+                                          ),
+                                          children: <TextSpan>[
+                                        TextSpan(
+                                            text: "Closest stanza length: ",
+                                            style: GoogleFonts.cardo(
+                                              fontSize: isAndroid()
+                                                  ? 18
+                                                  : mobileWeb
+                                                      ? 15
+                                                      : 22,
+                                              color: Colors.black,
+                                            )),
+                                        TextSpan(
+                                            text:
+                                                "${formData["Stanza lengths"]}",
+                                            style: GoogleFonts.cardo(
+                                                fontSize: isAndroid()
+                                                    ? 18
+                                                    : mobileWeb
+                                                        ? 15
+                                                        : 22,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold)),
+                                      ])),
+                                ],
+                              );
                             } else {
                               return const CircularProgressIndicator();
                             }
