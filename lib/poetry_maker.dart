@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:poetry_maker/api/api.dart';
 import 'package:poetry_maker/components/poems.dart';
 import 'package:poetry_maker/components/rive_display.dart';
@@ -182,37 +183,30 @@ class _PoetryMakerState extends State<PoetryMaker> {
                 ),
               ]),
             ),
-            quill.QuillToolbar.basic(
-              controller: controller,
-              toolbarIconSize: 15,
-              showQuote: false,
-              showIndent: false,
-              showDividers: false,
-              showSubscript: false,
-              showSuperscript: false,
-              showListBullets: false,
-              showListNumbers: false,
-              showHeaderStyle: false,
-              showListCheck: false,
-              showInlineCode: false,
-              showSearchButton: false,
-              showLink: false,
-            ),
             LayoutBuilder(
               builder: (context, constraints) {
                 return SizedBox(
                   width: screenWidth,
                   height: screenHeight,
-                  child: quill.QuillEditor(
-                    controller: controller,
-                    focusNode: focusNode,
-                    scrollController: scrollController,
-                    scrollable: true,
-                    padding: const EdgeInsets.all(15.0),
-                    autoFocus: true,
-                    readOnly: false,
-                    expands: true,
-                    textCapitalization: TextCapitalization.sentences,
+                  child: QuillProvider(
+                    configurations: QuillConfigurations(
+                      controller: controller,
+                      sharedConfigurations: const QuillSharedConfigurations(
+                        locale: Locale('en'),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        const QuillToolbar(),
+                        Expanded(
+                          child: QuillEditor.basic(
+                            configurations: const QuillEditorConfigurations(
+                              readOnly: false,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },

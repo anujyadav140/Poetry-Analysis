@@ -8,11 +8,11 @@ void main() async {
         debugShowCheckedModeBanner: false,
         scrollBehavior: MyCustomScrollBehavior(),
         title: "Poetry Maker",
-        theme: ThemeData(
-            colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Colors.blue[200],
-          secondary: Colors.pinkAccent,
-        )),
+        // theme: ThemeData(
+        //     colorScheme: ColorScheme.fromSwatch().copyWith(
+        //   primary: Colors.blue[200],
+        //   secondary: Colors.pinkAccent,
+        // )),
         home: const SafeArea(child: PoetryMaker())),
   );
 }
