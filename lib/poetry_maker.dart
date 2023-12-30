@@ -441,42 +441,42 @@ class _PoetryMakerState extends State<PoetryMaker> {
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold)),
                                       ])),
-                                  RichText(
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 12,
-                                      text: TextSpan(
-                                          style: TextStyle(
-                                            fontSize: isAndroid()
-                                                ? 18
-                                                : mobileWeb
-                                                    ? 15
-                                                    : 22,
-                                            color: Colors.black,
-                                          ),
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                                text: "Closest rhyme scheme: ",
-                                                style: GoogleFonts.cardo(
-                                                  fontSize: isAndroid()
-                                                      ? 18
-                                                      : mobileWeb
-                                                          ? 15
-                                                          : 22,
-                                                  color: Colors.black,
-                                                )),
-                                            TextSpan(
-                                                text:
-                                                    "${formData["Rhyme scheme"]}",
-                                                style: GoogleFonts.cardo(
-                                                    fontSize: isAndroid()
-                                                        ? 18
-                                                        : mobileWeb
-                                                            ? 15
-                                                            : 22,
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ])),
+                                  // RichText(
+                                  //     overflow: TextOverflow.ellipsis,
+                                  //     maxLines: 12,
+                                  //     text: TextSpan(
+                                  //         style: TextStyle(
+                                  //           fontSize: isAndroid()
+                                  //               ? 18
+                                  //               : mobileWeb
+                                  //                   ? 15
+                                  //                   : 22,
+                                  //           color: Colors.black,
+                                  //         ),
+                                  //         children: <TextSpan>[
+                                  //           TextSpan(
+                                  //               text: "Closest rhyme scheme: ",
+                                  //               style: GoogleFonts.cardo(
+                                  //                 fontSize: isAndroid()
+                                  //                     ? 18
+                                  //                     : mobileWeb
+                                  //                         ? 15
+                                  //                         : 22,
+                                  //                 color: Colors.black,
+                                  //               )),
+                                  //           TextSpan(
+                                  //               text:
+                                  //                   "${formData["Rhyme scheme"]}",
+                                  //               style: GoogleFonts.cardo(
+                                  //                   fontSize: isAndroid()
+                                  //                       ? 18
+                                  //                       : mobileWeb
+                                  //                           ? 15
+                                  //                           : 22,
+                                  //                   color: Colors.black,
+                                  //                   fontWeight:
+                                  //                       FontWeight.bold)),
+                                  //         ])),
                                   RichText(
                                       text: TextSpan(
                                           style: TextStyle(
